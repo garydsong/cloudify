@@ -1,6 +1,8 @@
 "use client"
 
 import Box from "./Box";
+import SidebarItem from "./SidebarItem";
+import Library from "./Library";
 import { usePathname } from "next/navigation"
 import { useMemo } from "react";
 import { HiHome } from "react-icons/hi"
@@ -32,8 +34,20 @@ const Sidebar: React.FC<SidebarProps> = ({
     return (
         <div className="flex h-full">
             <div className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2">
-                <Box>Sidebar Nav</Box>
+                <Box>
+                    <div className="flex flex-col gap-y-4 px-5 py-4">
+                        {routes.map(i => (
+                            <SidebarItem key={i.label} {...i}></SidebarItem>
+                        ))}
+                    </div>
+                </Box>
+                <Box className="overflow-y-auto h-full">
+                    <Library></Library>
+                </Box>
             </div>
+            <main className="h-full flex-1 overflow-y-auto py-2">
+                {children}
+            </main>
         </div>
     )
 }
