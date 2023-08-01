@@ -1,4 +1,8 @@
-import React from 'react'
+"use client"
+
+import { usePathname } from "next/navigation"
+import { useMemo } from "react";
+
 interface SidebarProps {
     children: React.ReactNode;
 }
@@ -6,11 +10,25 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({
     children
 }) => {
-  return (
-    <div>
-        {children}
-    </div>
-  )
+    const pathname = usePathname()
+    const routes = useMemo(() => [
+        {
+            label: "Home",
+            active: pathname !== "/search",
+            href: "/"
+        },
+        {
+            label: "Search",
+            active: pathname === "/search",
+            href: "/search"
+        },
+    ], [pathname])
+
+    return (
+        <div>
+            {children}
+        </div>
+    )
 }
 
 export default Sidebar
