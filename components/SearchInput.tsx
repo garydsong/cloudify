@@ -21,7 +21,7 @@ const SearchInput = () => {
         })
 
         router.push(url)
-    }, [])
+    }, [debouncedValue, router])
 
   return (
     <Input
